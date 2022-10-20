@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
     
     
       
@@ -1370,7 +1370,7 @@
 
 
 <h1 id="bare-metal">Bare-Metal<a class="headerlink" href="#bare-metal" title="Permanent link">&para;</a></h1>
-<p>In this tutorial, we'll network boot and provision a Kubernetes v1.25.1 cluster on bare-metal with Fedora CoreOS.</p>
+<p>In this tutorial, we'll network boot and provision a Kubernetes v1.25.3 cluster on bare-metal with Fedora CoreOS.</p>
 <p>First, we'll deploy a <a href="https://github.com/poseidon/matchbox">Matchbox</a> service and setup a network boot environment. Then, we'll declare a Kubernetes cluster using the Typhoon Terraform module and power on machines. On PXE boot, machines will install Fedora CoreOS to disk, reboot into the disk install, and provision themselves as Kubernetes controllers or workers via Ignition.</p>
 <p>Controller hosts are provisioned to run an <code>etcd-member</code> peer and a <code>kubelet</code> service. Worker hosts run a <code>kubelet</code> service. Controller nodes run <code>kube-apiserver</code>, <code>kube-scheduler</code>, <code>kube-controller-manager</code>, and <code>coredns</code>, while <code>kube-proxy</code> and <code>calico</code> (or <code>flannel</code>) run on every node. A generated <code>kubeconfig</code> provides <code>kubectl</code> access to the cluster.</p>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
@@ -1484,7 +1484,7 @@ Terraform v1.0.0
 <h2 id="cluster">Cluster<a class="headerlink" href="#cluster" title="Permanent link">&para;</a></h2>
 <p>Define a Kubernetes cluster using the module <code>bare-metal/fedora-coreos/kubernetes</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;mercury&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git::https://github.com/poseidon/typhoon//bare-metal/fedora-coreos/kubernetes?ref=v1.25.1&quot;</span><span class="c1"></span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git::https://github.com/poseidon/typhoon//bare-metal/fedora-coreos/kubernetes?ref=v1.25.3&quot;</span><span class="c1"></span>
 
 <span class="c1">  # bare-metal</span>
 <span class="w">  </span><span class="na">cluster_name</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mercury&quot;</span><span class="w"></span>
@@ -1578,9 +1578,9 @@ systemd[1]: Started Kubernetes control plane.
 <div class="highlight"><pre><span></span><code>$ export KUBECONFIG=/home/user/.kube/configs/mercury-config
 $ kubectl get nodes
 NAME                STATUS  ROLES   AGE  VERSION
-node1.example.com   Ready   &lt;none&gt;  10m  v1.25.1
-node2.example.com   Ready   &lt;none&gt;  10m  v1.25.1
-node3.example.com   Ready   &lt;none&gt;  10m  v1.25.1
+node1.example.com   Ready   &lt;none&gt;  10m  v1.25.3
+node2.example.com   Ready   &lt;none&gt;  10m  v1.25.3
+node3.example.com   Ready   &lt;none&gt;  10m  v1.25.3
 </code></pre></div>
 <p>List the pods.</p>
 <div class="highlight"><pre><span></span><code>$ kubectl get pods --all-namespaces

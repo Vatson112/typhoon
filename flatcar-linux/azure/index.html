@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
     
     
       
@@ -1340,7 +1340,7 @@
 
 
 <h1 id="azure">Azure<a class="headerlink" href="#azure" title="Permanent link">&para;</a></h1>
-<p>In this tutorial, we'll create a Kubernetes v1.25.1 cluster on Azure with Flatcar Linux.</p>
+<p>In this tutorial, we'll create a Kubernetes v1.25.3 cluster on Azure with Flatcar Linux.</p>
 <p>We'll declare a Kubernetes cluster using the Typhoon Terraform module. Then apply the changes to create a resource group, virtual network, subnets, security groups, controller availability set, worker scale set, load balancer, and TLS assets.</p>
 <p>Controller hosts are provisioned to run an <code>etcd-member</code> peer and a <code>kubelet</code> service. Worker hosts run a <code>kubelet</code> service. Controller nodes run <code>kube-apiserver</code>, <code>kube-scheduler</code>, <code>kube-controller-manager</code>, and <code>coredns</code>, while <code>kube-proxy</code> and <code>calico</code> (or <code>flannel</code>) run on every node. A generated <code>kubeconfig</code> provides <code>kubectl</code> access to the cluster.</p>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
@@ -1384,13 +1384,13 @@ Terraform v1.0.0
 <p>Additional configuration options are described in the <code>azurerm</code> provider <a href="https://www.terraform.io/docs/providers/azurerm/">docs</a>.</p>
 <h2 id="flatcar-linux-images">Flatcar Linux Images<a class="headerlink" href="#flatcar-linux-images" title="Permanent link">&para;</a></h2>
 <p>Flatcar Linux publishes images to the Azure Marketplace and requires accepting terms.</p>
-<div class="highlight"><pre><span></span><code>az vm image terms show --publish kinvolk --offer flatcar-container-linux-free --plan stable
-az vm image terms accept --publish kinvolk --offer flatcar-container-linux-free --plan stable
+<div class="highlight"><pre><span></span><code>az vm image terms accept --publish kinvolk --offer flatcar-container-linux-free --plan stable
+az vm image terms accept --publish kinvolk --offer flatcar-container-linux-free --plan stable-gen2
 </code></pre></div>
 <h2 id="cluster">Cluster<a class="headerlink" href="#cluster" title="Permanent link">&para;</a></h2>
 <p>Define a Kubernetes cluster using the module <code>azure/flatcar-linux/kubernetes</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;ramius&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git::https://github.com/poseidon/typhoon//azure/flatcar-linux/kubernetes?ref=v1.25.1&quot;</span><span class="c1"></span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git::https://github.com/poseidon/typhoon//azure/flatcar-linux/kubernetes?ref=v1.25.3&quot;</span><span class="c1"></span>
 
 <span class="c1">  # Azure</span>
 <span class="w">  </span><span class="na">cluster_name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ramius&quot;</span><span class="w"></span>
@@ -1441,9 +1441,9 @@ Apply complete! Resources: <span class="m">69</span> added, <span class="m">0</s
 <div class="highlight"><pre><span></span><code>$ export KUBECONFIG=/home/user/.kube/configs/ramius-config
 $ kubectl get nodes
 NAME                  STATUS  ROLES   AGE  VERSION
-ramius-controller-0   Ready   &lt;none&gt;  24m  v1.25.1
-ramius-worker-000001  Ready   &lt;none&gt;  25m  v1.25.1
-ramius-worker-000002  Ready   &lt;none&gt;  24m  v1.25.1
+ramius-controller-0   Ready   &lt;none&gt;  24m  v1.25.3
+ramius-worker-000001  Ready   &lt;none&gt;  25m  v1.25.3
+ramius-worker-000002  Ready   &lt;none&gt;  24m  v1.25.3
 </code></pre></div>
 <p>List the pods.</p>
 <div class="highlight"><pre><span></span><code>$ kubectl get pods --all-namespaces
@@ -1558,7 +1558,7 @@ kube-system   kube-scheduler-ramius-controller-0          1/1    Running   0    
 <tr>
 <td align="left">worker_type</td>
 <td align="left">Machine type for workers</td>
-<td align="left">"Standard_DS1_v2"</td>
+<td align="left">"Standard_D2as_v5"</td>
 <td align="left">See below</td>
 </tr>
 <tr>

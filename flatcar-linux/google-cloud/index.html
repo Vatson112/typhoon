@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
     
     
       
@@ -1326,7 +1326,7 @@
 
 
 <h1 id="google-cloud">Google Cloud<a class="headerlink" href="#google-cloud" title="Permanent link">&para;</a></h1>
-<p>In this tutorial, we'll create a Kubernetes v1.25.1 cluster on Google Compute Engine with Flatcar Linux.</p>
+<p>In this tutorial, we'll create a Kubernetes v1.25.3 cluster on Google Compute Engine with Flatcar Linux.</p>
 <p>We'll declare a Kubernetes cluster using the Typhoon Terraform module. Then apply the changes to create a network, firewall rules, health checks, controller instances, worker managed instance group, load balancers, and TLS assets.</p>
 <p>Controller hosts are provisioned to run an <code>etcd-member</code> peer and a <code>kubelet</code> service. Worker hosts run a <code>kubelet</code> service. Controller nodes run <code>kube-apiserver</code>, <code>kube-scheduler</code>, <code>kube-controller-manager</code>, and <code>coredns</code>, while <code>kube-proxy</code> and <code>calico</code> (or <code>flannel</code>) run on every node. A generated <code>kubeconfig</code> provides <code>kubectl</code> access to the cluster.</p>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
@@ -1378,7 +1378,7 @@ Terraform v1.0.0
 <h2 id="cluster">Cluster<a class="headerlink" href="#cluster" title="Permanent link">&para;</a></h2>
 <p>Define a Kubernetes cluster using the module <code>google-cloud/flatcar-linux/kubernetes</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;yavin&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git::https://github.com/poseidon/typhoon//google-cloud/flatcar-linux/kubernetes?ref=v1.25.1&quot;</span><span class="c1"></span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git::https://github.com/poseidon/typhoon//google-cloud/flatcar-linux/kubernetes?ref=v1.25.3&quot;</span><span class="c1"></span>
 
 <span class="c1">  # Google Cloud</span>
 <span class="w">  </span><span class="na">cluster_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;yavin&quot;</span><span class="w"></span>
@@ -1429,9 +1429,9 @@ Apply complete! Resources: <span class="m">78</span> added, <span class="m">0</s
 <div class="highlight"><pre><span></span><code>$ export KUBECONFIG=/home/user/.kube/configs/yavin-config
 $ kubectl get nodes
 NAME                                       ROLES    STATUS  AGE  VERSION
-yavin-controller-0.c.example-com.internal  &lt;none&gt;   Ready   6m   v1.25.1
-yavin-worker-jrbf.c.example-com.internal   &lt;none&gt;   Ready   5m   v1.25.1
-yavin-worker-mzdm.c.example-com.internal   &lt;none&gt;   Ready   5m   v1.25.1
+yavin-controller-0.c.example-com.internal  &lt;none&gt;   Ready   6m   v1.25.3
+yavin-worker-jrbf.c.example-com.internal   &lt;none&gt;   Ready   5m   v1.25.3
+yavin-worker-mzdm.c.example-com.internal   &lt;none&gt;   Ready   5m   v1.25.3
 </code></pre></div>
 <p>List the pods.</p>
 <div class="highlight"><pre><span></span><code>$ kubectl get pods --all-namespaces

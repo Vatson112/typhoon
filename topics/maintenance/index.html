@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
     
     
       
@@ -1418,12 +1418,12 @@
 <h2 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h2>
 <p>Typhoon provides tagged releases to allow clusters to be versioned using ordinary Terraform configs.</p>
 <div class="highlight"><pre><span></span><code>module &quot;yavin&quot; {
-  source = &quot;git::https://github.com/poseidon/typhoon//google-cloud/fedora-coreos/kubernetes?ref=v1.25.1&quot;
+  source = &quot;git::https://github.com/poseidon/typhoon//google-cloud/fedora-coreos/kubernetes?ref=v1.25.3&quot;
   ...
 }
 
 module &quot;mercury&quot; {
-  source = &quot;git::https://github.com/poseidon/typhoon//bare-metal/flatcar-linux/kubernetes?ref=v1.25.1&quot;
+  source = &quot;git::https://github.com/poseidon/typhoon//bare-metal/flatcar-linux/kubernetes?ref=v1.25.3&quot;
   ...
 }
 </code></pre></div>
@@ -1592,7 +1592,7 @@ Apply complete! Resources: 0 added, 0 changed, 55 destroyed.
 <p>However, changing <code>os_stream</code>/<code>os_channel</code> or new AMIs becoming available will NOT change the launch configuration or trigger an Instance Refresh. This allows Fedora CoreOS or Flatcar Linux to auto-update themselves via reboots and avoids unexpected terraform diffs for new AMIs.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Before Typhoon v1.25.1, worker nodes only used new launch configurations when replaced manually (or due to failure). If you must change node configuration manually, it's still possible. Create a new <a href="../../advanced/worker-pools/">worker pool</a>, then scale down the old worker pool as desired.</p>
+<p>Before Typhoon v1.25.3, worker nodes only used new launch configurations when replaced manually (or due to failure). If you must change node configuration manually, it's still possible. Create a new <a href="../../advanced/worker-pools/">worker pool</a>, then scale down the old worker pool as desired.</p>
 </div>
 <h3 id="google-cloud">Google Cloud<a class="headerlink" href="#google-cloud" title="Permanent link">&para;</a></h3>
 <p>On Google Cloud, worker instances belong to a <a href="https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups">managed instance group</a>. When a group's launch template changes, a <a href="https://cloud.google.com/compute/docs/instance-groups/rolling-out-updates-to-managed-instance-groups">rolling update</a> gradually replaces worker instances.</p>
@@ -1628,7 +1628,7 @@ Apply complete! Resources: 0 added, 0 changed, 55 destroyed.
 <p>However, changing <code>os_stream</code>/<code>os_channel</code> or new compute images becoming available will NOT change the launch template or update instances. This allows Fedora CoreOS or Flatcar Linux to auto-update themselves via reboots and avoids unexpected terraform diffs for new AMIs.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Before Typhoon v1.25.1, worker nodes only used new launch templates when replaced manually (or due to failure). If you must change node configuration manually, it's still possible. Create a new <a href="../../advanced/worker-pools/">worker pool</a>, then scale down the old worker pool as desired.</p>
+<p>Before Typhoon v1.25.3, worker nodes only used new launch templates when replaced manually (or due to failure). If you must change node configuration manually, it's still possible. Create a new <a href="../../advanced/worker-pools/">worker pool</a>, then scale down the old worker pool as desired.</p>
 </div>
 <h2 id="upgrade-poseidonct">Upgrade poseidon/ct<a class="headerlink" href="#upgrade-poseidonct" title="Permanent link">&para;</a></h2>
 <p>The <a href="https://github.com/poseidon/terraform-provider-ct">poseidon/ct</a> Terraform provider plugin parses, validates, and converts Butane Configs to Ignition user-data for provisioning instances. Since Typhoon v1.12.2+, the plugin can be updated in-place so that on apply, only workers will be replaced.</p>

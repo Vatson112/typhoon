@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
     
     
       
@@ -1228,7 +1228,7 @@
 <p>Typhoon distributes upstream Kubernetes, architectural conventions, and cluster addons, much like a GNU/Linux distribution provides the Linux kernel and userspace components.</p>
 <h2 id="features">Features <a href="https://www.cncf.io/certification/software-conformance/"><img align="right" src="https://storage.googleapis.com/poseidon/certified-kubernetes.png"></a><a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Kubernetes v1.25.1 (upstream)</li>
+<li>Kubernetes v1.25.3 (upstream)</li>
 <li>Single or multi-master, <a href="https://www.projectcalico.org/">Calico</a> or <a href="https://github.com/cilium/cilium">Cilium</a> or <a href="https://github.com/coreos/flannel">flannel</a> networking</li>
 <li>On-cluster etcd with TLS, <a href="https://kubernetes.io/docs/admin/authorization/rbac/">RBAC</a>-enabled, <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/">network policy</a>, SELinux enforcing</li>
 <li>Advanced features like <a href="advanced/worker-pools/">worker pools</a>, <a href="fedora-coreos/google-cloud/#preemption">preemptible</a> workers, and <a href="advanced/customization/#hosts">snippets</a> customization</li>
@@ -1356,6 +1356,12 @@
 <td><a href="advanced/arm64/">aws/flatcar-linux/kubernetes</a></td>
 <td>alpha</td>
 </tr>
+<tr>
+<td>Azure</td>
+<td>Flatcar Linux (ARM64)</td>
+<td><a href="advanced/arm64/">azure/flatcar-linux/kubernetes</a></td>
+<td>alpha</td>
+</tr>
 </tbody>
 </table>
 <h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
@@ -1367,7 +1373,7 @@
 <h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <p>Define a Kubernetes cluster by using the Terraform module for your chosen platform and operating system. Here's a minimal example.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;yavin&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git::https://github.com/poseidon/typhoon//google-cloud/fedora-coreos/kubernetes?ref=v1.25.1&quot;</span><span class="c1"></span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git::https://github.com/poseidon/typhoon//google-cloud/fedora-coreos/kubernetes?ref=v1.25.3&quot;</span><span class="c1"></span>
 
 <span class="c1">  # Google Cloud</span>
 <span class="w">  </span><span class="na">cluster_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;yavin&quot;</span><span class="w"></span>
@@ -1399,9 +1405,9 @@ Apply complete! Resources: <span class="m">62</span> added, <span class="m">0</s
 <div class="highlight"><pre><span></span><code>$ export KUBECONFIG=/home/user/.kube/configs/yavin-config
 $ kubectl get nodes
 NAME                                       ROLES    STATUS  AGE  VERSION
-yavin-controller-0.c.example-com.internal  &lt;none&gt;   Ready   6m   v1.25.1
-yavin-worker-jrbf.c.example-com.internal   &lt;none&gt;   Ready   5m   v1.25.1
-yavin-worker-mzdm.c.example-com.internal   &lt;none&gt;   Ready   5m   v1.25.1
+yavin-controller-0.c.example-com.internal  &lt;none&gt;   Ready   6m   v1.25.3
+yavin-worker-jrbf.c.example-com.internal   &lt;none&gt;   Ready   5m   v1.25.3
+yavin-worker-mzdm.c.example-com.internal   &lt;none&gt;   Ready   5m   v1.25.3
 </code></pre></div>
 <p>List the pods.</p>
 <div class="highlight"><pre><span></span><code>$ kubectl get pods --all-namespaces
